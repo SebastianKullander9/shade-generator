@@ -30,7 +30,7 @@ Pages:
 to-do:
 
 [x] Setup next.js project
-[] Create landing page and general UI
+[x] Create landing page and general UI
 [] create "add new color" component
 [] build /addcolor form
 [] save entry to localstorage
