@@ -31,12 +31,10 @@ export default function ColorInput() {
                     onChange={(e) => {
                         setColor(e.target.value);
                     }}
-                    className="w-32 h-8 p-4 border rounded cursor-pointer"
+                    className="w-full h-8 p-4 border rounded cursor-pointer"
                 />
                 <p className="text-xs text-red-500">{isValidColor ? "" : "The color needs to be in the format of HEX, RGB/RGBA or HSL/HSLA"}</p>
             </form>
-            
         </div>
-        
     );
 }    

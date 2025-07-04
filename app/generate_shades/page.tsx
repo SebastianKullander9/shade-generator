@@ -1,12 +1,14 @@
 "use client";
 import ColorInput from "../components/ColorInput";
+import RenderShades from "../components/RenderShades";
 
 export default function GenerateShades() {
 	return (
-		<div className="flex justify-center">
+		<div className="w-full">
             <div>
-                <p>Hello world</p>
+                <p>Enter a color</p>
 			    <ColorInput />
+				<RenderShades />
             </div>
 		</div>
 	);
