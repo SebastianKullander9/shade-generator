@@ -31,10 +31,10 @@ to-do:
 
 [x] Setup next.js project
 [x] Create landing page and general UI
-[] create "add new color" component
+[x] create "add new color" component
 [] build /addcolor form
-[] save entry to localstorage
-[] create a component to generate colors based on the input colors
+[x] save entry to localstorage
+[x] create a component to generate colors based on the input colors
 [] create a component to view the colors
 
 -------------------------------------------------------

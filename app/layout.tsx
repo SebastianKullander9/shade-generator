@@ -34,6 +34,7 @@ export default function RootLayout({
           {children}
           </div>
       </body>
+      <script src="https://accounts.google.com/gsi/client" async></script>
     </html>
   );
 }
