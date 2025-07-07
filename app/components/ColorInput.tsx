@@ -1,40 +1,69 @@
 "use client";
-import { useState } from "react";
-import Color from 'color';
+import React from "react";
+import { Formik, } from "formik";
 
-export default function ColorInput() {
-    const [color, setColor] = useState("");
-    const [isValidColor, setIsValidColor] = useState(false);
-    
-    const colorRegex = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$|^rgb\(\s*(?:\d{1,3}%?\s*,\s*){2}\d{1,3}%?\s*\)$|^rgba\(\s*(?:\d{1,3}%?\s*,\s*){3}(?:0|1|0?\.\d+)\s*\)$|^hsl\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*\)$|^hsla\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*,\s*(?:0|1|0?\.\d+)\s*\)$/i;
+const colorRegex = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$|^rgb\(\s*(?:\d{1,3}%?\s*,\s*){2}\d{1,3}%?\s*\)$|^rgba\(\s*(?:\d{1,3}%?\s*,\s*){3}(?:0|1|0?\.\d+)\s*\)$|^hsl\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*\)$|^hsla\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%\s*,\s*(?:0|1|0?\.\d+)\s*\)$/i;
 
-    function validateInput(color: string) {
-        return colorRegex.test(color)
-    }
+interface FormValues {
+    color: string;
+}
 
-    function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
-        event?.preventDefault();
-        setIsValidColor(validateInput(color));
-        const formatColorTo = Color(color);
+const ColorInput = () => (
+    <div>
+        <h1>Input a color</h1>
+        <Formik<FormValues>
+            initialValues={{ color: "" }}
+            validate={(values): Partial<FormValues> => {
+                const errors: Partial<FormValues> = {};
 
-        if (isValidColor) {
-            localStorage.setItem("color", JSON.stringify(formatColorTo.hsl()))
-        }
-    }
+                if (!values.color) {
+                    errors.color = "Required";
+                } else if (
+                    !colorRegex.test(values.color)
+                ) {
+                    errors.color = "The color must be of valid format. (hex, rgb/rgba, hsl/hsla)"
+                }
 
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={color}
-                    onChange={(e) => {
-                        setColor(e.target.value);
-                    }}
-                    className="w-full h-8 p-4 border rounded cursor-pointer"
-                />
-                <p className="text-xs text-red-500">{isValidColor ? "" : "The color needs to be in the format of HEX, RGB/RGBA or HSL/HSLA"}</p>
-            </form>
-        </div>
-    );
-}    
+                return errors;
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+                const exist = localStorage.getItem("array");
+                const currentArray = exist ? JSON.parse(exist) : [];
+
+                currentArray.push(values.color);
+                localStorage.setItem("array", JSON.stringify(currentArray));
+
+                setSubmitting(false);
+            }}
+        >
+            {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+            }) => (
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="color"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.color}
+                        autoComplete="off"
+                    />
+                    {errors.color && touched.color && (
+                        <div style={{ color: 'red' }}>{errors.color}</div>
+                    )}
+                    <button type="submit" disabled={isSubmitting}>
+                        Add color
+                    </button>
+                </form>
+            )}
+        </Formik>
+    </div>
+);
+
+export default ColorInput;
