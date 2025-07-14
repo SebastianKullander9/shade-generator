@@ -2,6 +2,7 @@
 import ColorInput from "../components/ColorInput";
 //import RenderShades from "../components/RenderShades";
 import GenerateShades from "../components/GenerateShades";
+import GenerateCode from "../components/GenerateCode";
 
 export default function Home() {
 	return (
@@ -11,6 +12,7 @@ export default function Home() {
 			    <ColorInput />
 				<div className="mb-10"></div>
 				<GenerateShades />
+				<GenerateCode />
             </div>
 		</div>
 	);

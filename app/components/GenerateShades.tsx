@@ -1,19 +1,20 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import convert from 'color-convert';
 import namer from "color-namer";
 import { useColorContext } from '../context/ColorContext';
+import { useShadesContext } from '../context/ShadesContext';
 
 type ColorShades = {
-    name?: string;
+    name: string;
     originalHex: string;
     shades: number[][];
 }
 
 export default function GenerateShades() {
-    const [ shades, setShades ] = useState<ColorShades[]>();
     const { colors } = useColorContext();
+    const { shades, setShades } = useShadesContext();
 
     useEffect(() => {
         //const colors = JSON.parse(localStorage.getItem("array") ?? "[]");
