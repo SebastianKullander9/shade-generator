@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import convert from 'color-convert';
+import namer from "color-namer";
+import { useColorContext } from '../context/ColorContext';
 
 type ColorShades = {
     name?: string;
@@ -11,9 +13,10 @@ type ColorShades = {
 
 export default function GenerateShades() {
     const [ shades, setShades ] = useState<ColorShades[]>();
+    const { colors } = useColorContext();
 
     useEffect(() => {
-        const colors = JSON.parse(localStorage.getItem("array") ?? "[]");
+        //const colors = JSON.parse(localStorage.getItem("array") ?? "[]");
         const allShades: ColorShades[] = [];
 
         colors.map((color: string) => {
@@ -24,6 +27,7 @@ export default function GenerateShades() {
             const range = end - start;
             const increment = range / numberOfShades;
             const thisColorShades: number[][] = [];
+            const names = namer(color[0]);
             
 
             for (let i = 1; i < numberOfShades + 1; i++) {
@@ -35,13 +39,14 @@ export default function GenerateShades() {
 
             allShades.push({
                 originalHex: color,
+                name: names.basic[0].name,
                 shades: thisColorShades
             })
-            
         });
 
         setShades(allShades);
-    }, [])
+        console.log(allShades)
+    }, [colors])
 
     return (
         <div className="">
