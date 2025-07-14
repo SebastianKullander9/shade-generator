@@ -9,6 +9,7 @@ export default function Home() {
             <div>
                 <p>Enter a color</p>
 			    <ColorInput />
+				<div className="mb-10"></div>
 				<GenerateShades />
             </div>
 		</div>

@@ -3,12 +3,18 @@
 import { useEffect, useState } from 'react';
 import convert from 'color-convert';
 
+type ColorShades = {
+    name?: string;
+    originalHex: string;
+    shades: number[][];
+}
+
 export default function GenerateShades() {
-    //const [colorArray, setColorArray] = useState([])
-    //const [shades, setShades] = useState<string[][]>([])
+    const [ shades, setShades ] = useState<ColorShades[]>();
 
     useEffect(() => {
         const colors = JSON.parse(localStorage.getItem("array") ?? "[]");
+        const allShades: ColorShades[] = [];
 
         colors.map((color: string) => {
             const hsl = convert.hex.hsl(color);
@@ -17,21 +23,47 @@ export default function GenerateShades() {
             const end = 90;
             const range = end - start;
             const increment = range / numberOfShades;
-            const shades = [];
+            const thisColorShades: number[][] = [];
+            
 
             for (let i = 1; i < numberOfShades + 1; i++) {
-                const tempHsl = hsl.splice(2, 1, increment * i);
-
-                shades.push(tempHsl);
+                const lightness = start + increment * i;
+                const tempHsl = [...hsl.slice(0, 2), lightness];
+                
+                thisColorShades.push(tempHsl);
             }
 
-            console.log(shades);
+            allShades.push({
+                originalHex: color,
+                shades: thisColorShades
+            })
+            
         });
+
+        setShades(allShades);
     }, [])
 
     return (
-        <div>
-
+        <div className="">
+            {shades?.map((shadeObj) => {
+                return (
+                    <div key={shadeObj.originalHex} className="flex mb-10">
+                    {shadeObj.shades.map((hsl, i) => (
+                        <div 
+                            key={i}
+                            className="w-15 h-15"
+                            style={{backgroundColor: `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`}}
+                        >
+                            <div className="flex justify-center">
+                                <div className="flex justify-center relative bottom-7 bg-gray-400 w-10 rounded">
+                                    <p className="flex">{hsl[2]}%</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                    </div>
+                );
+            })}
         </div>
     );
 }
