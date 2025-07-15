@@ -8,7 +8,7 @@ import { useShadesContext } from '../context/ShadesContext';
 
 type ColorShades = {
     name: string;
-    originalHex: string;
+    original_hex: string;
     shades: number[][];
 }
 
@@ -39,21 +39,21 @@ export default function GenerateShades() {
             }
 
             allShades.push({
-                originalHex: color,
+                original_hex: color,
                 name: names.basic[0].name,
                 shades: thisColorShades
             })
         });
 
         setShades(allShades);
-        console.log(allShades)
+        console.log("SHADES: ", allShades)
     }, [colors])
 
     return (
         <div className="">
             {shades?.map((shadeObj) => {
                 return (
-                    <div key={shadeObj.originalHex} className="flex mb-10">
+                    <div key={shadeObj.original_hex} className="flex mb-10">
                     {shadeObj.shades.map((hsl, i) => (
                         <div 
                             key={i}

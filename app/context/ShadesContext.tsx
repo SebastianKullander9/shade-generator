@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 type ShadeColor = {
-    originalHex: string;
+    original_hex: string;
     name: string;
     shades: number[][];
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs'
@@ -15,7 +16,7 @@ const handleOAuthLogin = async (provider: 'google' | 'github') => {
 			prompt: 'consent',
 		} : undefined,
 	},
-})
+});
 
 if (error) console.error(`${provider} login error:`, error)
 }
