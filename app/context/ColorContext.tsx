@@ -5,6 +5,7 @@ type ColorContextType = {
     colors: string[];
     addColor: (color: string) => void;
     clearColors: () => void;
+    setColor: (newColors: string[]) => void;
 }
 
 const colorContext = createContext<ColorContextType | undefined>(undefined);
@@ -16,6 +17,10 @@ export const ColorProvider = ({ children }: { children: ReactNode }) => {
         setColors((prev) => [...prev, color]);
     };
 
+    const setColor = (newColors: string[]) => {
+        setColors(newColors);
+    };
+
     /*const removeColor = (hex: string) => {
         setColors((prev) => prev.filter((c) => c.originalHex !== hex));
     };*/
@@ -23,7 +28,7 @@ export const ColorProvider = ({ children }: { children: ReactNode }) => {
     const clearColors = () => setColors([]);
 
     return (
-        <colorContext.Provider value={{ colors, addColor, clearColors }}>
+        <colorContext.Provider value={{ colors, addColor, clearColors, setColor }}>
             {children}
         </colorContext.Provider>
     );

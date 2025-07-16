@@ -1,7 +1,9 @@
 import { useEffect } from "react";
-import { useShadesContext } from "../context/ShadesContext"
-import { useRouter } from "next/navigation"
-import { createClient } from "@/utils/supabase/client"
+import { useShadesContext } from "../context/ShadesContext";
+import { useColorContext } from "../context/ColorContext";
+import { useProjectNameContext } from "../context/ProjectNameContext";
+import { createClient } from "@/utils/supabase/client";
+import isEqual from 'lodash.isequal';
 
 type Shade = {
     hue: number;
@@ -16,19 +18,22 @@ type Color = {
 }
 
 type ProjectData = {
+    name: string;
     colors: Color[];
 };
 
 export default function ProjectLoader({ projectId }: { projectId: string }) {
     const supabase = createClient();
-    const { setShades } = useShadesContext();
-    const router = useRouter();
+    const { shades, setShades } = useShadesContext();
+    const { setColor } = useColorContext();
+    const { setProjectName } = useProjectNameContext(); 
 
     useEffect(() => {
         async function loadProject() {
             const { data, error } = await supabase
                 .from("projects")
                 .select(`
+                    name,
                     colors (
                         name,
                         original_hex,
@@ -53,11 +58,15 @@ export default function ProjectLoader({ projectId }: { projectId: string }) {
                 shades: color.shades.map((s) => [s.hue, s.saturation, s.lightness] as [number, number, number])
             }));
 
-            setShades(shadesData);
+            if (!isEqual(shades, shadesData)) {
+                setShades(shadesData);
+            }
+            setProjectName(data.name)
+            setColor(data.colors.map(c => c.original_hex));
         }
 
         if (projectId) loadProject();
-    }, [projectId, setShades, router])
+    }, [])
 
     return <p>Loading project...</p>
 }

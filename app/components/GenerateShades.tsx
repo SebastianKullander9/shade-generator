@@ -5,6 +5,7 @@ import convert from 'color-convert';
 import namer from "color-namer";
 import { useColorContext } from '../context/ColorContext';
 import { useShadesContext } from '../context/ShadesContext';
+import isEqual from 'lodash.isequal';
 
 type ColorShades = {
     name: string;
@@ -17,7 +18,6 @@ export default function GenerateShades() {
     const { shades, setShades } = useShadesContext();
 
     useEffect(() => {
-        //const colors = JSON.parse(localStorage.getItem("array") ?? "[]");
         const allShades: ColorShades[] = [];
 
         colors.map((color: string) => {
@@ -28,7 +28,7 @@ export default function GenerateShades() {
             const range = end - start;
             const increment = range / numberOfShades;
             const thisColorShades: number[][] = [];
-            const names = namer(color[0]);
+            const names = namer(color);
             
 
             for (let i = 1; i < numberOfShades + 1; i++) {
@@ -45,9 +45,10 @@ export default function GenerateShades() {
             })
         });
 
-        setShades(allShades);
-        console.log("SHADES: ", allShades)
-    }, [colors])
+        if (!isEqual(allShades, shades)) {
+            setShades(allShades);
+        }
+    }, [colors, setShades])
 
     return (
         <div className="">

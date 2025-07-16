@@ -31,11 +31,10 @@ export default function ColorInput() {
                     return errors;
                 }}
                 onSubmit={(values, { setSubmitting }) => {
-                    const exist = localStorage.getItem("array");
-                    const currentArray = exist ? JSON.parse(exist) : [];
-
-                    currentArray.push(values.color);
-                    addColor(currentArray);
+                    console.log("Adding color:", values.color);
+                    
+                    addColor(values.color);
+                    
 
                     setSubmitting(false);
                 }}
