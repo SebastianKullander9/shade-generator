@@ -47,7 +47,13 @@ export default function SaveProject({ projectId, projectName, disabled }: SavePr
 
     return (
         <div>
-            <button disabled={disabled} onClick={handleClick}>Save Project</button>
+            <button 
+                className="w-full bg-gold-500 text-xl p-2 font-bold mt-2 rounded-md text-headline cursor-pointer hover:shadow-md"
+                disabled={disabled} 
+                onClick={handleClick}
+            >
+                Save Project
+            </button>
         </div>
     );
 }

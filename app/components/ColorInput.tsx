@@ -13,8 +13,7 @@ export default function ColorInput() {
     const { addColor } = useColorContext();
 
     return (
-            <div>
-            <h1>Input a color</h1>
+        <div className="">
             <Formik<FormValues>
                 initialValues={{ color: "" }}
                 validate={(values): Partial<FormValues> => {
@@ -48,8 +47,9 @@ export default function ColorInput() {
                     handleSubmit,
                     isSubmitting,
                 }) => (
-                    <form onSubmit={handleSubmit}>
+                    <form className="flex flex-col max-w-xs" onSubmit={handleSubmit}>
                         <input
+                            className="bg-gray-50 rounded-md p-2 text-xl"
                             type="text"
                             name="color"
                             onChange={handleChange}
@@ -60,7 +60,11 @@ export default function ColorInput() {
                         {errors.color && touched.color && (
                             <div style={{ color: 'red' }}>{errors.color}</div>
                         )}
-                        <button type="submit" disabled={isSubmitting}>
+                        <button 
+                            className="bg-gold-500 text-xl p-2 font-bold mt-2 rounded-md text-headline cursor-pointer hover:shadow-md"
+                            type="submit" 
+                            disabled={isSubmitting}
+                        >
                             Add color
                         </button>
                     </form>

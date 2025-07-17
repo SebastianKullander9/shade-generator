@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+//import { Geist, Geist_Mono } from "next/font/google";
+import { Work_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./context/Providers";
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
+const workSans = Work_Sans({
+    variable: "--font-work-sans",
     subsets: ["latin"],
 });
 
@@ -25,14 +21,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body className={`${workSans.variable} ${workSans.variable} antialiased`}>
+                
                 <Providers>
-                    <header className="w-full h-16 bg-white text-gray-900 border-b-1 border-gray-200 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700">
-                        <div className="mx-auto px-4 flex items-center justify-center h-full">
-                            <h1 className="text-xl font-semibold">Shade Generator</h1>
-                        </div>
-                    </header>
-                    <div className="flex justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+                    <div className="flex justify-center min-h-screen bg-background">
                         {children}
                     </div>
                 </Providers>

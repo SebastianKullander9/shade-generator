@@ -6,8 +6,11 @@ import ColorInput from "../components/ColorInput";
 import GenerateShades from "../components/GenerateShades";
 import GenerateCode from "../components/GenerateCode";
 import SaveProject from "../components/SaveProject";
+import ProjectSideBar from "../components/ProjectSideBar";
 //import ProjectLoader from "../components/ProjectLoader";
 import { useLoadProject } from "../hooks/useLoadProject"; // adjust path as needed
+import Image from "next/image";
+
 
 
 export default function Home() {
@@ -46,34 +49,42 @@ export default function Home() {
 	}
 
 	return (
-		<div className="w-full">
-            <div>
-                <p>Enter a color</p>
-			    <ColorInput />
-
-				<input 
-					type="text"
-					value={projectNameState}
-					onChange={(e) => {
-						setProjectNameState(e.target.value);
-						validateProjectName(e.target.value);
-					}}
-					onBlur={(e) => validateProjectName(e.target.value)}
-					placeholder="project name"
-				/>
-				{error && (
-					<p className="text-red-600 text-sm mt-1">{error}</p>
-				)}
-
-				<div className="mb-10"></div>
-				<GenerateShades />
-				<SaveProject 
-					projectId={id}
-					projectName={projectNameState}
-					disabled={!projectNameState || !!error}
-				/>
-				<GenerateCode />
-            </div>
+		<div className="">
+			<ProjectSideBar />
+			<div className="w-full h-20 flex justify-center items-center">
+				<Image src="/images/shadegenlogo.png" alt="Logo" width={200} height={60} />
+			</div>
+			<div className="min-w-6/12">
+				<div>
+					<div className="flex justify-center gap-10">
+						<ColorInput />
+						<div className="flex flex-col max-w-xs">
+							<input 
+								className="bg-gray-50 rounded-md p-2 text-xl"
+								type="text"
+								value={projectNameState}
+								onChange={(e) => {
+									setProjectNameState(e.target.value);
+									validateProjectName(e.target.value);
+								}}
+								onBlur={(e) => validateProjectName(e.target.value)}
+								placeholder="project name"
+							/>
+							{error && (
+								<p className="text-red-600 text-sm mt-1">{error}</p>
+							)}
+							<SaveProject 
+								projectId={id}
+								projectName={projectNameState}
+								disabled={!projectNameState || !!error}
+							/>
+						</div>
+					</div>
+					<div className="mb-10"></div>
+					<GenerateShades />
+					<GenerateCode />
+				</div>
+			</div>
 		</div>
 	);
 }

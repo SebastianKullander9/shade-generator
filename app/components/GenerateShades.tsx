@@ -51,18 +51,18 @@ export default function GenerateShades() {
     }, [colors, setShades])
 
     return (
-        <div className="">
+        <div className="pt-15">
             {shades?.map((shadeObj) => {
                 return (
-                    <div key={shadeObj.original_hex} className="flex mb-10">
+                    <div key={shadeObj.original_hex} className="flex justify-center mb-10">
                     {shadeObj.shades.map((hsl, i) => (
                         <div 
                             key={i}
-                            className="w-15 h-15"
+                            className="w-20 h-20 mb-8"
                             style={{backgroundColor: `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`}}
                         >
                             <div className="flex justify-center">
-                                <div className="flex justify-center relative bottom-7 bg-gray-400 w-10 rounded">
+                                <div className="flex justify-center relative bottom-8 bg-gray-50 text-text w-10 rounded">
                                     <p className="flex">{hsl[2]}%</p>
                                 </div>
                             </div>
