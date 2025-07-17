@@ -13,7 +13,8 @@ export default function ColorInput() {
     const { addColor } = useColorContext();
 
     return (
-        <div className="">
+        <div className="w-sm">
+            <p className="text-base text-text mb-4">Enter a color value using HEX, RGB, or HSL format. This input allows you to define the base color for generating shades.</p>
             <Formik<FormValues>
                 initialValues={{ color: "" }}
                 validate={(values): Partial<FormValues> => {
@@ -47,9 +48,9 @@ export default function ColorInput() {
                     handleSubmit,
                     isSubmitting,
                 }) => (
-                    <form className="flex flex-col max-w-xs" onSubmit={handleSubmit}>
+                    <form className="flex flex-col w-full" onSubmit={handleSubmit}>
                         <input
-                            className="bg-gray-50 rounded-md p-2 text-xl"
+                            className="bg-gray-50 border-gray-100 border-1 p-4 rounded-md text-base text-text"
                             type="text"
                             name="color"
                             onChange={handleChange}
@@ -61,11 +62,11 @@ export default function ColorInput() {
                             <div style={{ color: 'red' }}>{errors.color}</div>
                         )}
                         <button 
-                            className="bg-gold-500 text-xl p-2 font-bold mt-2 rounded-md text-headline cursor-pointer hover:shadow-md"
+                            className="bg-black text-lg p-2 mt-2 rounded-md text-white cursor-pointer hover:shadow-md hover:bg-gold-400"
                             type="submit" 
                             disabled={isSubmitting}
                         >
-                            Add color
+                            Add Your Hue
                         </button>
                     </form>
                 )}

@@ -15,7 +15,7 @@
   --color-background: #fffffe;
   --color-headline: #272343;
   --color-text: #2d334a;
-  --color-turqoise-900: hsl(177, 51%, 18%)
+  --color-turqoise-900: hsl(177, 51%, 18%);
   --color-turqoise-800: hsl(177, 51%, 26%);
   --color-turqoise-700: hsl(177, 51%, 34%);
   --color-turqoise-600: hsl(177, 51%, 42%);
@@ -45,6 +45,10 @@
   --color-gray-200: hsl(245, 10%, 74%);
   --color-gray-100: hsl(245, 10%, 82%);
   --color-gray-50: hsl(245, 10%, 90%);
+}
+
+.gradient {
+  background: linear-gradient(136deg,rgba(62, 193, 186, 1) 0%, rgba(62, 193, 186, 1) 38%, rgba(255, 217, 0, 1) 100%);
 }
 
 /*@media (prefers-color-scheme: dark) {

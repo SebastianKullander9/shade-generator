@@ -6,10 +6,11 @@ import ColorInput from "../components/ColorInput";
 import GenerateShades from "../components/GenerateShades";
 import GenerateCode from "../components/GenerateCode";
 import SaveProject from "../components/SaveProject";
-import ProjectSideBar from "../components/ProjectSideBar";
+//import ProjectSideBar from "../components/ProjectSideBar";
 //import ProjectLoader from "../components/ProjectLoader";
 import { useLoadProject } from "../hooks/useLoadProject"; // adjust path as needed
-import Image from "next/image";
+//import Image from "next/image";
+import IconDark from "../components/IconDark";
 
 
 
@@ -49,41 +50,13 @@ export default function Home() {
 	}
 
 	return (
-		<div className="">
-			<ProjectSideBar />
-			<div className="w-full h-20 flex justify-center items-center">
-				<Image src="/images/shadegenlogo.png" alt="Logo" width={200} height={60} />
+		<div className="w-full">
+			<IconDark />
+			<div className="bg-turqoise-50 h-[calc(100vh-200px)] flex justify-center items-center">
+				<ColorInput />
 			</div>
-			<div className="min-w-6/12">
-				<div>
-					<div className="flex justify-center gap-10">
-						<ColorInput />
-						<div className="flex flex-col max-w-xs">
-							<input 
-								className="bg-gray-50 rounded-md p-2 text-xl"
-								type="text"
-								value={projectNameState}
-								onChange={(e) => {
-									setProjectNameState(e.target.value);
-									validateProjectName(e.target.value);
-								}}
-								onBlur={(e) => validateProjectName(e.target.value)}
-								placeholder="project name"
-							/>
-							{error && (
-								<p className="text-red-600 text-sm mt-1">{error}</p>
-							)}
-							<SaveProject 
-								projectId={id}
-								projectName={projectNameState}
-								disabled={!projectNameState || !!error}
-							/>
-						</div>
-					</div>
-					<div className="mb-10"></div>
-					<GenerateShades />
-					<GenerateCode />
-				</div>
+			<div className="h-[100vh] bg-background">
+				<GenerateShades />
 			</div>
 		</div>
 	);
