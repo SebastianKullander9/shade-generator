@@ -9,7 +9,11 @@ interface FormValues {
     color: string;
 }
 
-export default function ColorInput() {
+interface ColorInputProps {
+    scrollToElement: () => void;
+}
+
+export default function ColorInput({ scrollToElement }: ColorInputProps) {
     const { addColor } = useColorContext();
 
     return (
@@ -37,6 +41,7 @@ export default function ColorInput() {
                     
 
                     setSubmitting(false);
+                    scrollToElement();
                 }}
             >
                 {({

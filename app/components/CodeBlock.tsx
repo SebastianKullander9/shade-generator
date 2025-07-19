@@ -26,7 +26,7 @@ export default function CodeBlock({ code }: { code: string }) {
             <SyntaxHighlighter
                 language="css"
                 style={prism}
-                customStyle={{ margin: 0, padding: "1rem", fontSize: "0.9rem" }}
+                customStyle={{ margin: 0, padding: "1rem", fontSize: "0.9rem", backgroundColor: "#fffffe"}}
             >
                 {code}
             </SyntaxHighlighter>

@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import convert from 'color-convert';
 import namer from "color-namer";
 import { useColorContext } from '../context/ColorContext';
 import { useShadesContext } from '../context/ShadesContext';
 import isEqual from 'lodash.isequal';
 import { IoCopyOutline } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa6";
+
 
 type ColorShades = {
     name: string;
@@ -17,6 +19,7 @@ type ColorShades = {
 export default function GenerateShades() {
     const { colors } = useColorContext();
     const { shades, setShades } = useShadesContext();
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         const allShades: ColorShades[] = [];
@@ -52,22 +55,32 @@ export default function GenerateShades() {
         }
     }, [colors, setShades])
 
+    const handleCopy = (hsl: [number, number, number]) => {
+        navigator.clipboard.writeText(`#${convert.hsl.hex(hsl)}`)
+        setCopied(true);
+        setTimeout(() => {
+            setCopied(false);
+        }, 1200)
+    }
+
     return (
-        <div className="h-full flex flex-col justify-center items-center mx-auto">
+        <div className="min-h-screen flex flex-col justify-center items-center mx-auto py-16">
             {shades?.map((shadeObj) => {
                 return (
                     <div key={shadeObj.original_hex} className="flex justify-center mb-10">
                     {shadeObj.shades.map((hsl, i) => (
                         <div 
                             key={i}
-                            className="relative group w-20 h-20 mb-8"
+                            className="relative group w-20 h-20 mt-18"
                             style={{backgroundColor: `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`}}
                         >
                             <button
-                                onClick={() => navigator.clipboard.writeText(`#${convert.hsl.hex(hsl as [number, number, number])}`)}
-                                className="absolute px-2 py-1 text-xs bg-white bg-opacity-80 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                                onClick={() => handleCopy(hsl as [number, number, number])}
+                                className="w-12 h-12 absolute left-4 top-4 cursor-pointer px-2 py-1 text-xs bg-white bg-opacity-80 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 transform active:scale-95 transition duration-150"
                             >
-                                <IoCopyOutline />
+                                <div className="flex justify-center items-center">
+                                    {copied ? <FaCheck  size={20} /> : <IoCopyOutline size={20} />}
+                                </div>
                             </button>
                             <div className="flex justify-center">
                                 <div className="flex justify-center relative bottom-8 bg-gray-50 text-text text-sm font-bold w-10 rounded">

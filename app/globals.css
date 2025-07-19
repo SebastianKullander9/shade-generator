@@ -45,6 +45,9 @@
   --color-gray-200: hsl(245, 10%, 74%);
   --color-gray-100: hsl(245, 10%, 82%);
   --color-gray-50: hsl(245, 10%, 90%);
+  --color-googleGray: #f2f2f2;
+  --color-googleHover: #001d35;
+
 }
 
 .gradient {

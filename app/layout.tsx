@@ -22,7 +22,6 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${workSans.variable} ${workSans.variable} antialiased`}>
-                
                 <Providers>
                     <div className="flex justify-center min-h-screen bg-background">
                         {children}
