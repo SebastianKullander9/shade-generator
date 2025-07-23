@@ -1,3 +1,5 @@
+"use client";
+
 import { createOrUpdateProjectById } from "@/utils/supabase/insertProject";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
@@ -26,6 +28,7 @@ export default function SaveProject({ projectId, projectName, disabled }: SavePr
     }, [supabase])
 
     const handleClick = async () => {
+        console.log("save project")
         console.log("test")
         if (!userId) {
             console.log("User not signed in")
@@ -48,7 +51,7 @@ export default function SaveProject({ projectId, projectName, disabled }: SavePr
     return (
         <div>
             <button 
-                className="w-full bg-gold-500 text-xl p-2 font-bold mt-2 rounded-md text-headline cursor-pointer hover:shadow-md"
+                className="w-full bg-black text-lg text-background p-2 font- mt-2 rounded-md cursor-pointer hover:bg-gold-500 hover:text-black hover:shadow-md"
                 disabled={disabled} 
                 onClick={handleClick}
             >

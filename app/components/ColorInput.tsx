@@ -67,7 +67,7 @@ export default function ColorInput({ scrollToElement }: ColorInputProps) {
                             <div style={{ color: 'red' }}>{errors.color}</div>
                         )}
                         <button 
-                            className="bg-black text-lg p-2 mt-2 rounded-md text-white cursor-pointer hover:shadow-md hover:bg-gold-400"
+                            className="bg-black text-lg p-2 mt-2 rounded-md text-white cursor-pointer hover:shadow-md hover:text-black hover:bg-gold-400"
                             type="submit" 
                             disabled={isSubmitting}
                         >

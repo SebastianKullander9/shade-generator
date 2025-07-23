@@ -34,12 +34,12 @@ export default function GenerateCode() {
     }, [shades])
 
     return (
-        <div className="flex justify-center gap-8 w-full py-16">
-            <div className="w-1/3">
+        <div className="flex flex-col md:flex-row justify-center mx-auto gap-8 py-16 px-8 w-full lg:w-3/5 md:w-full md:px-8 sm:w-4/5">
+            <div className="w-full">
                 <p className="text-base text-text mb-8">Copy the shades below to use them in your Tailwind project.</p>
                 <CodeBlock code={code} />
             </div>
-            <div className="w-1/3">
+            <div className="w-full">
                 <p className="text-base text-text mb-8">
                     If you prefer to use regular CSS instead of Tailwind, simply copy the shades and replace the <code>@theme</code> tag with <code>:root</code>. You can then use the colors as CSS variables, like in the example below.
                 </p>

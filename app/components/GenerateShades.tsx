@@ -26,7 +26,6 @@ export default function GenerateShades() {
 
         colors.map((color: string) => {
             const hsl = convert.hex.hsl(color);
-            const hex = convert.hsl.hex();
             const numberOfShades = 10;
             const start = 10;
             const end = 90;
@@ -67,7 +66,7 @@ export default function GenerateShades() {
         <div className="min-h-screen flex flex-col justify-center items-center mx-auto py-16">
             {shades?.map((shadeObj) => {
                 return (
-                    <div key={shadeObj.original_hex} className="flex justify-center mb-10">
+                    <div key={shadeObj.original_hex} className="grid grid-cols-4 lg:grid-cols-10 md:grid-cols-10 sm:grid-cols-5 mb-10">
                     {shadeObj.shades.map((hsl, i) => (
                         <div 
                             key={i}
