@@ -1,9 +1,10 @@
 "use client";
+
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 type ColorContextType = {
     colors: string[];
-    addColor: (color: string) => void;
+    addColors: (colors: string[]) => void;
     clearColors: () => void;
     setColor: (newColors: string[]) => void;
 }
@@ -13,22 +14,18 @@ const colorContext = createContext<ColorContextType | undefined>(undefined);
 export const ColorProvider = ({ children }: { children: ReactNode }) => {
     const [colors, setColors] = useState<string[]>([]);
 
-    const addColor = (color: string) => {
-        setColors((prev) => [...prev, color]);
+    const addColors = (colors: string[]) => {
+        setColors(colors);
     };
 
     const setColor = (newColors: string[]) => {
         setColors(newColors);
     };
 
-    /*const removeColor = (hex: string) => {
-        setColors((prev) => prev.filter((c) => c.originalHex !== hex));
-    };*/
-
     const clearColors = () => setColors([]);
 
     return (
-        <colorContext.Provider value={{ colors, addColor, clearColors, setColor }}>
+        <colorContext.Provider value={{ colors, addColors, clearColors, setColor }}>
             {children}
         </colorContext.Provider>
     );

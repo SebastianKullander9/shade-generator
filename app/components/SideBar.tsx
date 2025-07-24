@@ -15,7 +15,6 @@ export default function SideBar({ id, projectName, scrollToShades }: { id: strin
     const projectId = searchParams.get("projectId");
 
     useEffect(() => {
-        console.log("Project NAME IN SIDEBAR: ", projectName)
         const getUser = async () => {
             const supabase = createClient();
             const { data } = await supabase.auth.getUser();
@@ -27,7 +26,6 @@ export default function SideBar({ id, projectName, scrollToShades }: { id: strin
     
     const toggleOpen = () => {
         setIsOpen(!isOpen);
-        console.log(user)
     }
 
     return (
@@ -50,7 +48,7 @@ export default function SideBar({ id, projectName, scrollToShades }: { id: strin
                     </div>
                 }
             </div>
-            <div onClick={toggleOpen} className="absolute bg-background right-[-30] rounded-br-xl rounded-tr-xl top-1/2 cursor-pointer">
+            <div onClick={toggleOpen} className="absolute bg-background right-[-55] p-2 shadow-md hover:scale-105 rounded-full top-1/2 cursor-pointer">
                 {isOpen ? <IoIosArrowBack size={32}/> : <IoIosArrowForward size={32}/>} 
             </div>
         </div>

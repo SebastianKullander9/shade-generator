@@ -1,4 +1,5 @@
 "use client";
+
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 type ShadeColor = {
@@ -13,7 +14,7 @@ type ShadeContextType = {
     clearShades: () => void;
 }
 
-const codeContext = createContext<ShadeContextType | null>(null);
+const shadesContext = createContext<ShadeContextType | null>(null);
 
 export const ShadesProvider = ({ children }: { children: ReactNode }) => {
     const [ shades, setShadesState ] = useState<ShadeColor[]>([]);
@@ -27,14 +28,14 @@ export const ShadesProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <codeContext.Provider value={{ shades, setShades, clearShades }}>
+        <shadesContext.Provider value={{ shades, setShades, clearShades }}>
             {children}
-        </codeContext.Provider>
+        </shadesContext.Provider>
     );
 };
 
 export const useShadesContext = () => {
-    const context = useContext(codeContext);
-    if (!context) throw new Error("useCodeContext must be within CodeProvider");
+    const context = useContext(shadesContext);
+    if (!context) throw new Error("useShadeContext must be within CodeProvider");
     return context;
 };

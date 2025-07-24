@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-//import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { prism } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function CodeBlock({ code }: { code: string }) {
@@ -19,6 +18,7 @@ export default function CodeBlock({ code }: { code: string }) {
             <button
                 onClick={copyToClipboard}
                 className="absolute right-2 top-2 bg-gray-100 text-sm text-text px-3 py-1 rounded hover:bg-gray-200 cursor-pointer"
+                aria-label="Copy code to clipboard"
             >
                 {copied ? "Copied!" : "Copy"}
             </button>

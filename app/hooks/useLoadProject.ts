@@ -50,7 +50,7 @@ export const useLoadProject = () => {
 			.single<ProjectData>();
 
 		if (error) {
-			console.error("Error loading project:", error);
+			console.error("Error loading project: ", error);
 			return;
 		}
 

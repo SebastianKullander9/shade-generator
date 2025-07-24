@@ -28,10 +28,7 @@ export default function SaveProject({ projectId, projectName, disabled }: SavePr
     }, [supabase])
 
     const handleClick = async () => {
-        console.log("save project")
-        console.log("test")
         if (!userId) {
-            console.log("User not signed in")
             return
         }
 
@@ -45,7 +42,7 @@ export default function SaveProject({ projectId, projectName, disabled }: SavePr
             }))
         })
 
-        router.push(`/home/?projectId=${id}`)
+        router.push(`/?projectId=${id}`)
     }
 
     return (

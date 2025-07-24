@@ -1,24 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
-import { useRouter } from 'next/navigation'
-
 import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Logout() {
     const supabase = createPagesBrowserClient();
-    const router = useRouter();
 
     const handleOAuthLogout = async () => {
         const { error } = await supabase.auth.signOut();
 
         if (error) {
             console.error("Logout error:", error.message);
-            // Optionally show user a message or toast here
             return;
         }
         
-        window.location.href = "/home";
+        window.location.href = "/";
     }
 
     return (
